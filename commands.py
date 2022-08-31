@@ -104,17 +104,6 @@ class DoneCommand(BaseCommand):
     def label():
         return 'done'
 
-
-
-
-
-
-
-
-
-
-
-
     def perform(self, objects, *args, **kwargs):
         if len(objects) == 0:
             print('There are no items in storage.')
@@ -140,22 +129,6 @@ class DoneCommand(BaseCommand):
 
         selected_key.status = '+'
         print('Selected: {}'.format(selected_key))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class ExitCommand(BaseCommand):
