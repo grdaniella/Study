@@ -13,7 +13,7 @@ from commands import (
     ListCommand,
     NewCommand,
     ExitCommand,
-    # DoneCommand,
+    DoneCommand,
     # UndoneCommand,
     UserExitException,
 )
@@ -48,7 +48,7 @@ def get_routes():
         ListCommand.label(): ListCommand,
         NewCommand.label(): NewCommand,
         ExitCommand.label(): ExitCommand,
-        # DoneCommand.label(): DoneCommand,
+        DoneCommand.label(): DoneCommand,
     }
 
 
@@ -88,7 +88,7 @@ def parse_user_input():
             ListCommand.label(): ListCommand,
             NewCommand.label(): NewCommand,
             ExitCommand.label(): ExitCommand,
-            # DoneCommand.label(): DoneCommand,
+            DoneCommand.label(): DoneCommand,
         }.keys()
     )
     return input_function(message)
@@ -96,7 +96,7 @@ def parse_user_input():
 
 def main():
     """
-    Main method, works infinitelly until user runs `exit` command.
+    Main method, works infinitely until user runs `exit` command.
     Or hits `Ctrl+C` in the console.
     """
 

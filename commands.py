@@ -57,11 +57,12 @@ class NewCommand(BaseCommand):
         # )
         # return dict(classes)
 
-        from models import ToDoItem, ToBuyItem
+        from models import ToDoItem, ToBuyItem, ToReadItem
 
         return {
             'ToDoItem': ToDoItem,
             'ToBuyItem': ToBuyItem,
+            'ToReadItem': ToReadItem
         }
 
     def perform(self, objects, *args, **kwargs):
@@ -96,6 +97,65 @@ class NewCommand(BaseCommand):
         print('Added {}'.format(str(new_object)))
         print()
         return new_object
+
+
+class DoneCommand(BaseCommand):
+    @staticmethod
+    def label():
+        return 'done'
+
+
+
+
+
+
+
+
+
+
+
+
+    def perform(self, objects, *args, **kwargs):
+        if len(objects) == 0:
+            print('There are no items in storage.')
+            return
+        print('Select task number:')
+        for index, obj in enumerate(objects):
+            print('{}: {}'.format(index, str(obj)))
+
+        input_function = get_input_function()
+        selection = None
+        selected_key = None
+
+        while True:
+            try:
+                selection = int(input_function('Input number: '))
+                selected_key = objects[selection]
+
+                break
+            except ValueError:
+                print('Bad input, try again.')
+            except IndexError:
+                print('Wrong index, try again.')
+
+        selected_key.status = '+'
+        print('Selected: {}'.format(selected_key))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class ExitCommand(BaseCommand):

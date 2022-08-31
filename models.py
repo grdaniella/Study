@@ -5,7 +5,7 @@ __author__ = 'sobolevn'
 from utils import get_input_function
 
 
-class Storage(object):  # storage = Storge()
+class Storage(object):  # storage = Storage()
     obj = None
 
     items = None
@@ -19,6 +19,8 @@ class Storage(object):  # storage = Storge()
 
 
 class BaseItem(object):
+    status = '-'
+
     def __init__(self, heading):
         self.heading = heading
 
@@ -32,8 +34,9 @@ class BaseItem(object):
 
 class ToDoItem(BaseItem):
     def __str__(self):
-        return 'ToDo: {}'.format(
-            self.heading
+        return 'ToDo: {} {}'.format(
+            self.heading,
+            self.status
         )
 
     @classmethod
@@ -49,9 +52,10 @@ class ToBuyItem(BaseItem):
         self.price = price
 
     def __str__(self):
-        return 'ToBuy: {} for {}'.format(
+        return 'ToBuy: {} for {} {}'.format(
             self.heading,
             self.price,
+            self.status
         )
 
     @classmethod
@@ -60,3 +64,23 @@ class ToBuyItem(BaseItem):
         heading = input_function('Input heading: ')
         price = input_function('Input price: ')
         return ToBuyItem(heading, price)
+
+
+class ToReadItem(BaseItem):
+    def __init__(self, heading, url):
+        super(ToReadItem, self).__init__(heading)
+        self.url = url
+
+    def __str__(self):
+        return 'ToRead: {} for {} {}'.format(
+            self.heading,
+            self.url,
+            self.status
+        )
+
+    @classmethod
+    def construct(cls):
+        input_function = get_input_function()
+        heading = input_function('Input heading: ')
+        url = input_function('Input url: ')
+        return ToReadItem(heading, url)
